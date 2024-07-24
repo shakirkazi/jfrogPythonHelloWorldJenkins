@@ -1,31 +1,22 @@
 pipeline {
     agent any
+	tools {
+        jfrog 'jfrog-cli'
+    }
 
     environment {
-        ARTIFACTORY_SERVER = 'Your-Artifactory-Server-ID'
-        PYPI_REPO = 'your-pypi-repo'
-        PACKAGE_NAME = 'your-python-package'
-        JFROG_CLI_HOME = "${env.WORKSPACE}/jfrog-cli"
+        ARTIFACTORY_SERVER = $ARTIFACTORY_SERVER
+        PYPI_REPO = $PYPI_REPO
+        PACKAGE_NAME = $PACKAGE_NAME
     }
 
     stages {
-        stage('Setup') {
-            steps {
-                script {
-                    // Ensure JFrog CLI is installed and configured
-                    if (!fileExists('jfrog')) {
-                        sh 'curl -fL https://getcli.jfrog.io | sh'
-                    }
-                    sh "jfrog rt config --url=$ARTIFACTORY_SERVER --user=$ARTIFACTORY_USER --password=$ARTIFACTORY_PASSWORD --interactive=false"
-                }
-            }
-        }
 
         stage('Build') {
             steps {
                 script {
                     // Your build steps here
-                    sh 'python setup.py sdist'
+                    sh 'python3 setup.py sdist bdist_wheel'
                 }
             }
         }
