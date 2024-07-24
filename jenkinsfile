@@ -5,9 +5,9 @@ pipeline {
     }
 
     environment {
-        ARTIFACTORY_SERVER = $ARTIFACTORY_SERVER
-        PYPI_REPO = $PYPI_REPO
-        PACKAGE_NAME = $PACKAGE_NAME
+        ARTIFACTORY_SERVER = "$ARTIFACTORY_SERVER"
+        PYPI_REPO = "$PYPI_REPO"
+        PACKAGE_NAME = "$PACKAGE_NAME"
     }
 
     stages {
