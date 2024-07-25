@@ -15,6 +15,12 @@ pipeline {
 	stage('Setup') {
             steps {
                 script {
+		    // Check if server configuration exists and remove it
+                    sh '''
+                    if jfrog config show artifactory-server > /dev/null 2>&1; then
+                        jfrog config remove artifactory-server
+                    fi
+                    '''
                     // Configure JFrog CLI with your Artifactory server details
                     sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --interactive=false'
                 }
