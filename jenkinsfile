@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     // Configure JFrog CLI with your Artifactory server details
-                    sh 'jfrog rt config --url=$ARTIFACTORY_URL --interactive=false'
+                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --interactive=false'
                 }
             }
         }
