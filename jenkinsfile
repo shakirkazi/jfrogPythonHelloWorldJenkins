@@ -8,8 +8,6 @@ pipeline {
         ARTIFACTORY_SERVER = "$ARTIFACTORY_SERVER"
         PYPI_REPO = "$PYPI_REPO"
         PACKAGE_NAME = "$PACKAGE_NAME"
-        ARTIFACTORY_USERNAME = credentials('jfrogjenkinsuser') // Jenkins credentials ID for Artifactory username
-        ARTIFACTORY_PASSWORD = credentials('JFrogJenkinsCred') // Jenkins credentials ID for Artifactory password or API key
 
         PATH = "/usr/local/bin:$PATH"  // Ensure this is the correct path where jfrog is located
     }
@@ -25,8 +23,8 @@ pipeline {
                     fi
                     '''
                     // Configure JFrog CLI with your Artifactory server details
-                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --interactive=false'
-                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --user=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_USERNAME} --interactive=false'
+                    withCredentials([usernamePassword(credentialsId: 'JFrogJenkinsCred', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
+                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --user=$JFROG_USER --password=$JFROG_PASSWORD --interactive=false'
                 }
             }
         }
