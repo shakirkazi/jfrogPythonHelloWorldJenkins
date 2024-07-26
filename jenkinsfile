@@ -26,7 +26,7 @@ pipeline {
                     '''
                     // Configure JFrog CLI with your Artifactory server details
                     sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --interactive=false'
-                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --user=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_USERNAME} --interactive=false
+                    sh 'jfrog config add artifactory-server --artifactory-url=$ARTIFACTORY_SERVER --user=${ARTIFACTORY_USERNAME} --password=${ARTIFACTORY_USERNAME} --interactive=false'
                 }
             }
         }
