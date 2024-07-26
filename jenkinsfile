@@ -42,8 +42,6 @@ pipeline {
                     sh '''
                         #!/bin/bash
                         ls -ltr
-                        cd $LIB_DIRECTORY
-                        ls -ltr
                         jfrog config show
                         export JFROG_CLI_LOG_LEVEL=DEBUG
                         jfrog rt upload --flat=true dist/$PACKAGE_NAME-*.tar.gz $PYPI_REPO
