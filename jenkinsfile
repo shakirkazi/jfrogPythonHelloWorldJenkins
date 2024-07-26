@@ -34,7 +34,17 @@ pipeline {
                 }
             }
         }
-
+        stage('Verify Artifacts') {
+            steps {
+                script {
+                    // Verify the files in the dist directory
+                    sh '''
+                    echo "Listing contents of dist directory:"
+                    ls -ltr dist/
+                    '''
+                }
+            }
+        }
         stage('Publish') {
             steps {
                 script {
