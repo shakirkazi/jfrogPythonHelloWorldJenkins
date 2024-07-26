@@ -49,7 +49,12 @@ pipeline {
             steps {
                 script {
                     // Publish to Artifactory
-                    sh "jfrog rt upload --flat=true dist/$PACKAGE_NAME-*.tar.gz $PYPI_REPO/"
+                    sh '''
+                        #!/bin/bash
+                        echo "Uploading files to Artifactory..."
+                        export JFROG_CLI_LOG_LEVEL=DEBUG
+                        jfrog rt upload --flat=true dist/${PACKAGE_NAME}-*.tar.gz $PYPI_REPO
+                    '''
                 }
             }
         }
