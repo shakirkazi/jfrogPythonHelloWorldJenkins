@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
 
 setup(
     name='hello_world',
-    version='0.8.1',
+    version='0.9',
     packages=find_packages(include=['hello_lib', 'hello_lib.*']),
     install_requires=[],
     entry_points={
