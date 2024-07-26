@@ -8,5 +8,5 @@ def hello(user):
     Returns:
         str: A greeting message.
     """
-    greet = " Jfrog python library! v0.8.1"  # This is Jfrog python library!  print(greet, user)
+    greet = " Jfrog python library! v0.9"  # This is Jfrog python library!  print(greet, user)
     return greet + " " + user
