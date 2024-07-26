@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='hello_world',
+    name='hello-world',
     version='0.9',
     packages=find_packages(include=['hello_lib', 'hello_lib.*']),
     install_requires=[],
