@@ -42,10 +42,10 @@ pipeline {
 
                     build_number=${BUILD_NUMBER}
                     setup_py_file="./setup.py"
-                    sed -i "s/\\(version=\\s*['\\\"]\\([0-9]\\+\\.[0-9]\\+\\)\\.x['\\\"]\\)/\\1.$build_number/" $setup_py_file
+                    sed -i "s/version='[0-9]*\\.[0-9]*\\.[0-9]*'/version='0.1.$build_number'/" $setup_py_file
 
                     echo "Contents of $setup_py_file after update:"
-                    cat $setup_py_file
+                    cat ./setup.py
                     '''
                 }
             }
