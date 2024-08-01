@@ -29,6 +29,18 @@ pipeline {
                 }
             }
         }
+
+	stage('Update Version') {
+            steps {
+                script {
+                    // Update the version in setup.py within the LIB_DIRECTORY
+                    sh '''
+                    build_number=${BUILD_NUMBER}
+                    sed -i "s/\\(version=\\s*['\\\"]\\([0-9]\\+\\.[0-9]\\+\\)\\.x['\\\"]\\)/\\1.$build_number/" setup.py
+                    '''
+                }
+            }
+        }
         stage('Build') {
             steps {
                 script {
@@ -71,8 +83,6 @@ pipeline {
 
                 // Create a Git tag with the build number
                 sh '''
-                git config user.name "jenkins"
-                git config user.email "jenkins@example.com"
                 git tag -a v${BUILD_NUMBER} -m "Build #${BUILD_NUMBER}"
                 git push origin v${BUILD_NUMBER}
                 '''
