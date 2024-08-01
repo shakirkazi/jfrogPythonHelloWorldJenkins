@@ -33,10 +33,10 @@ pipeline {
         stage('Update Version') {
             steps {
                 script {
-                    // Update the version in setup.py within the LIB_DIRECTORY
+                    // Update the version in setup.py 
                     sh '''
                     build_number=${BUILD_NUMBER}
-                    setup_py_file="./setup.py"
+                    setup_py_file="setup.py"
                     sed -i "s/\\(version=\\s*['\\\"]\\([0-9]\\+\\.[0-9]\\+\\)\\.x['\\\"]\\)/\\1.$build_number/" $setup_py_file
                     '''
                     // Confirm the version has been updated
@@ -89,8 +89,8 @@ pipeline {
 
                 // Create a Git tag with the build number
                 sh '''
-                git tag -a v${BUILD_NUMBER} -m "Build #${BUILD_NUMBER}"
-                git push origin v${BUILD_NUMBER}
+                echo git tag -a v${BUILD_NUMBER} -m "Build #${BUILD_NUMBER}"
+                echo git push origin v${BUILD_NUMBER}
                 '''
 
                 // Clean workspace
