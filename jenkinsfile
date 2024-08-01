@@ -65,7 +65,21 @@ pipeline {
 
     post {
         always {
-            cleanWs()
+            script {
+                // Get the current build number
+                def buildNumber = env.BUILD_NUMBER
+
+                // Create a Git tag with the build number
+                sh '''
+                git config user.name "jenkins"
+                git config user.email "jenkins@example.com"
+                git tag -a v${BUILD_NUMBER} -m "Build #${BUILD_NUMBER}"
+                git push origin v${BUILD_NUMBER}
+                '''
+
+                // Clean workspace
+                cleanWs()
+            }
         }
     }
 }
